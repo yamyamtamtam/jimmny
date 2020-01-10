@@ -21,11 +21,58 @@
           }
         ?>
       </section>
-      <section class="single-content__nextprev">
-        <?php previous_post_link(); ?>
-        <?php next_post_link(); ?>
+      <section class="nextprev-wrap">
+        <div class="nextprev nextprev--prev">
+          <?php previous_post_link('前の記事<br>%link'); ?>
+        </div>
+        <div class="nextprev nextprev--next">
+          <?php next_post_link('次の記事<br>%link '); ?>
+        </div>
+      </section>
+      <section class="sp-nextprev-wrap">
+        <div class="sp-nextprev sp-nextprev--prev">
+          <?php previous_post_link('%link','<'); ?>
+        </div>
+        <div class="sp-nextprev sp-nextprev--next">
+          <?php next_post_link('%link','>'); ?>
+        </div>
       </section>
       <?php comments_template(); ?>
     </article>
 </main>
+<?php
+$title = get_the_title(get_the_ID());
+$title_split = str_split($title);
+$ids = get_posts(array(
+  'numberposts' => -1,
+  'post_type' => 'post',
+  'post_status' => 'publish',
+  'fields' => 'ids'
+));
+$recommends = array();
+foreach ($ids as $id) {
+  $other_title = get_the_title($id);
+  $other_title_split = str_split($other_title);
+  $equal_count = array_intersect($title_split,$other_title_split);
+  $recommends[$other_title] = count($equal_count);
+}
+arsort($recommends);
+var_dump($recommends);
+?>
+<script>
+jQuery(function($){
+  $.ajax({
+    type: 'POST',
+    url: ajaxurl,
+    data: {
+      'action':'recommendCall',
+      'id':<?php echo get_the_ID(); ?>
+    },
+    success: function( response ){
+      //var jsonData = JSON.parse( response );
+      alert(response);
+    }
+  });
+})
+</script>
 <?php get_footer();

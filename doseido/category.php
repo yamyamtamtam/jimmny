@@ -8,12 +8,32 @@ Template Name: カテゴリページ
   <?php
     $items = get_posts('numberposts=-1&post_type=post&post_status=publish&orderby=data&fields=ids&category=' . $cat);
     $number_in_page = 6;
-    $page_count = $number_in_page;
+    $number_in_page_logic = $number_in_page - 1;
+    $page_count = $number_in_page_logic;
     $count = 0;
+    $category = get_category($cat);
+    $parents = get_ancestors($cat,'category');
+    $parents = array_reverse($parents);
+  ?>
+  <nav class="breadcrumb">
+    <a class="breadcrumb__link" href="<?php echo esc_url(home_url( '/' )); ?>">TOP</a>
+    <?php
+      if($parents):
+        foreach($parents as $parent):
+          $current_category = get_category($parent);
+    ?>
+    <a class="breadcrumb__link" href="<?php echo esc_url(home_url( '/' )) . 'category/' . $current_category->slug; ?>"><?php echo $current_category->name; ?></a>
+    <?php
+        endforeach;
+      endif;
+    ?>
+    <a class="breadcrumb__current"><?php echo $category->name; ?> の記事一覧</a>
+  </nav>
+  <?php
     if(!empty($items)):
       if($_GET['pagenation']){
         $page_count = $_GET['pagenation'] * $number_in_page - 1;
-        $count = $page_count - ($number_in_page - 1);
+        $count = $page_count - $number_in_page_logic;
       }
   ?>
   <section class="postlist">
@@ -21,7 +41,7 @@ Template Name: カテゴリページ
       <?php if($items[$i]): ?>
     <article class="postcard">
       <a href="<?php echo get_permalink($items[$i]); ?>">
-        <h2 class="postcard__title"><?php echo get_the_title($items[$i]); ?><span class="postcard__guide">をよむ</span></h2>
+        <h2 class="postcard__title"><?php echo get_the_title($items[$i]); ?><!--<span class="postcard__guide">をよむ</span>--></h2>
         <p class="postcard__date"><?php echo get_the_date('Y年m月d日', $items[$i]); ?></p>
         <div class="postcard__thumb">
           <?php if(get_the_post_thumbnail($items[$i])): ?>

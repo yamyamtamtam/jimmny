@@ -20,4 +20,10 @@ jQuery(function($){
     }, 500);
     return false;
   });
+  $(".js-humbergerButton").click(function(){
+    $(".humberger-nav").addClass("humberger-nav--active");
+  });
+  $(".js-humbergerClose").click(function(){
+    $(".humberger-nav").removeClass("humberger-nav--active");
+  });
 })

@@ -1,68 +1,55 @@
 <?php
 /*
-Template Name: TOPページ
+Template Name: カテゴリページ
 */
 ?>
 <?php get_header(); ?>
 <main class="content">
   <?php
-    $search_word = htmlspecialchars($_GET["word"], ENT_QUOTES, 'UTF-8');
-    $items = get_posts('numberposts=-1&post_type=post&post_status=publish&orderby=data&fields=ids');
+    $current_year = get_query_var('year');
+    $current_month = get_query_var('monthnum');
+    $current_day = get_query_var('day');
+    $items = get_posts(array(
+      'numberposts' => -1,
+      'post_type' => 'post',
+      'post_status' => 'publish',
+      'orderby' => 'data',
+      'fields'=> 'ids',
+      'date_query' => array(
+        'year' => $current_year,
+        'month' => $current_month,
+        'day' => $current_day
+      )
+    ));
     $number_in_page = 6;
     $number_in_page_logic = $number_in_page - 1;
     $page_count = $number_in_page_logic;
     $count = 0;
+  ?>
+  <nav class="breadcrumb">
+    <a class="breadcrumb__link" href="<?php echo esc_url(home_url( '/' )); ?>">TOP</a>
+    <a class="breadcrumb__current">
+      <?php
+        if($current_year !== 0){
+          echo $current_year . '年';
+        }
+        if($current_month !== 0){
+          echo $current_month . '月';
+        }
+        if($current_day !== 0){
+          echo $current_day . '日';
+        }
+      ?>
+      の記事一覧
+    </a>
+  </nav>
+  <?php
     if(!empty($items)):
       if($_GET['pagenation']){
         $page_count = $_GET['pagenation'] * $number_in_page - 1;
         $count = $page_count - $number_in_page_logic;
       }
-    //wordによってitemsの配列を変更する
-    //同棲の時は親カテゴリまでさかのぼって「同棲」の語がカテゴリにある投稿だけ残す
-    if($search_word !== '' && $search_word === 'dousei'):
-      foreach($items as $key=>$item){
-        $current_cat_list = '';
-        $current_cats = get_the_category($item);
-        foreach($current_cats as $current_cat){
-          $current_cat_word = get_category_parents($current_cat->term_id);
-          $current_cat_list = $current_cat_list . $current_cat_word;
-          if(strpos($current_cat_list,'同棲') === false){
-            unset($items[$key]);
-          }
-        }
-      }
-      $items = array_values($items);
   ?>
-    <nav class="breadcrumb">
-      <a class="breadcrumb__link" href="<?php echo esc_url(home_url( '/' )); ?>">TOP</a>
-      <a class="breadcrumb__current">同棲 の記事一覧</a>
-    </nav>
-  <?php endif; ?>
-  <?php
-    //その他の時は親カテゴリまでさかのぼって「同棲」の語がカテゴリになくて「毒親・毒兄弟」の語がカテゴリになくて「自律神経失調症・不安症・発達障害」の語がカテゴリにない投稿だけ残す
-    if($search_word !== '' && $search_word === 'other'):
-      foreach($items as $key=>$item){
-        $current_cat_list = '';
-        $current_cats = get_the_category($item);
-        foreach($current_cats as $current_cat){
-          $current_cat_word = get_category_parents($current_cat->term_id);
-          $current_cat_list = $current_cat_list . $current_cat_word;
-          if(
-            strpos($current_cat_list,'同棲') !== false ||
-            strpos($current_cat_list,'毒親・毒兄弟') !== false ||
-            strpos($current_cat_list,'自律神経失調症・不安症・発達障害') !== false
-          ){
-            unset($items[$key]);
-          }
-        }
-      }
-      $items = array_values($items);
-  ?>
-  <nav class="breadcrumb">
-    <a class="breadcrumb__link" href="<?php echo esc_url(home_url( '/' )); ?>">TOP</a>
-    <a class="breadcrumb__current">その他 の記事一覧</a>
-  </nav>
-  <?php endif; ?>
   <section class="postlist">
     <?php for($i = $count; $i <= $page_count; $i++): ?>
       <?php if($items[$i]): ?>
@@ -72,7 +59,7 @@ Template Name: TOPページ
         <p class="postcard__date"><?php echo get_the_date('Y年m月d日', $items[$i]); ?></p>
         <div class="postcard__thumb">
           <?php if(get_the_post_thumbnail($items[$i])): ?>
-          <img src="<?php echo get_the_post_thumbnail_url( $items[$i], 'medium' ); ?>" alt="">
+          <img src="<?php echo get_the_post_thumbnail( $items[$i], 'medium' ); ?>" alt="">
           <?php else: ?>
           <div class="postcard__thumb--dummy"></div>
           <?php endif; ?>

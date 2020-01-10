@@ -9,9 +9,8 @@ Author URI: http://dousei-do.pink/
 /**********************/
 /******** 共通 ********/
 /**********************/
-body{  font-family: Quicksand, '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; color:#333; }
+body{ position:relative; font-family: Quicksand, '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; color:#333; }
 main{ display:block; }
-a:hover{ opacity:0.8; }
 
 /* ページTOPへ戻る */
 #js-page-top { position:fixed; z-index:1000; bottom:20px; right:20px; }
@@ -26,20 +25,33 @@ a:hover{ opacity:0.8; }
 .postcard{ width:calc(100% / 3 - 30px); margin:0 30px 30px 0; box-shadow:0 0 6px #DDD; border-radius:2px; }
 .postcard:nth-of-type(3n){ margin:0 0 30px 0; }
 .postcard a{ color:#444; text-decoration:none; }
-.postcard__title{ font-size:21px; padding:15px; color:#444; font-weight:bold; line-height:1.2; border-bottom:2px solid #e4228e; }
+.postcard__title{ font-size:21px; padding:15px 15px 10px; color:#e4228e; font-weight:bold; line-height:1.2; /*border-bottom:2px solid #e4228e;*/ word-break:break-all; }
 .postcard__guide{ font-size:12px; margin:0 0 0 20px; color:#e4228e; border-bottom:2px solid #e4228e; }
-.postcard__date{ font-size:12px; padding:15px; }
+.postcard__date{ font-size:12px; padding:0 15px 5px; }
 .postcard__thumb{ position:relative; overflow:hidden; width:100%; height:200px; }
 .postcard__thumb img{ position:absolute; top:0; right:0; bottom:0; left:0; width:100%; margin:auto; }
 .postcard__thumb--dummy{ width:100%; height:100%; background:rgb(255, 255, 231); }
 .postcard__content{ padding:15px; font-size:14px; }
 .postcard__cat{ display:flex; justify-content:flex-start; align-items:stretch; flex-wrap:wrap; padding:15px; }
 .postcard__cat li{ margin:0 10px 10px 0; }
-.postcard__cat li a{ font-size:12px; padding:5px 15px; background:#e4228e; color:#FFF; border-radius:15px; }
+.postcard__cat li a{ display:inline-block; font-size:12px; padding:8px 15px; background:#e4228e; color:#FFF; border-radius:15px; }
+
+/*パンくずリスト*/
+.breadcrumb{ display:flex; justify-content:flex-start; flex-wrap:wrap; align-items:center; width:100%; max-width:1080px; margin:0 auto 40px; }
+.breadcrumb__link{ font-size:14px; color:#e4228e; margin:0 10px 0 0; text-decoration:none; }
+.breadcrumb__link:after{ content:'>'; color:#333; margin:0 0 0 10px; }
+.breadcrumb__current{ font-size:14px; }
 
 /* SP */
 @media only screen and (max-width:767px){
-
+  .postlist{ width:95%; }
+  .postcard{ width:calc(100% / 2 - 10px); margin:0 0 20px 0; }
+  .postcard:nth-of-type(3n){ margin:0 0 20px 0; }
+  .postcard:nth-of-type(2n){ margin:0 0 20px 20px; }
+  .postcard__title{ font-size:19px; }
+  .postcard__thumb{ height:120px; }
+  .postcard__cat li{ margin:0 5px 5px 0; }
+  .breadcrumb{ width:95%; }
 }
 
 /**********************/
@@ -48,11 +60,29 @@ a:hover{ opacity:0.8; }
 .header{ width:100%; padding:40px 0 0;  }
 .header-headline{ text-align:center; }
 .g-nav{ width:100%; margin:40px 0 0; background:#e4228e; }
-.g-nav__inner{ display:flex; justify-content:space-between; width:100%; max-width:1080px; margin:0 auto; background:#e4228e; }
+.g-nav__inner{ display:flex; justify-content:space-between; width:100%; max-width:1080px; margin:0 auto; }
 .g-nav__inner li{ display:flex; justify-content:center; align-items:center; width:calc(100% / 5); text-align:center; }
-.g-nav__inner a{ width:100%; padding:15px 0; text-decoration:none; font-size:16px; color:#FFF; line-height:1.3; }
+.g-nav__inner a{ width:100%; padding:15px 0; text-decoration:none; font-size:14px; color:#FFF; line-height:1.3; }
+.humberger-button{ position:fixed; z-index:10; top:10px; right:10px; width:60px; height:auto; padding:10px; box-sizing:border-box; cursor:pointer; background:rgba(228,34,142,0.7); border-radius:5px; }
+.humberger-button__line{ display:block; width:90%; height:3px; margin:0 auto 6px; background:#FFF; border-radius:10px; }
+.humberger-button__text{ font-size:10px; color:#FFF; margin:10px 0 0; }
+.humberger-nav{ display:none; position:fixed; z-index:100; top:0; left:0; width:100%; height:100%; padding:60px 30px 0; overflow-y:scroll; scrollbar-width:none; background:rgba(228,34,142,0.9); justify-content:space-around; }
+.humberger-nav--active{ display:flex; }
+.humberger-nav::-webkit-scrollbar{ display:none; }
+.humberger-nav__close{ position:fixed; z-index:1000; top:10px; right:10px; font-size:42px; color:#FFF; font-weight:bold; cursor:pointer; }
+.cat-nav{ margin:30px 0 0; }
+.cat-nav__first{ color:#FFF; font-size:15px; margin:0 0 25px; }
+.cat-nav__first a{ color:#FFF; text-decoration:none; }
+.cat-nav__second{ color:#FFF; font-size:14px; margin:0 0 25px; padding:0 0 0 15px; }
+.cat-nav__second a{ color:#FFF; text-decoration:none; }
+.archive-nav{ margin:30px 0 0; }
+.archive-nav li{ color:#FFF; font-size:15px; margin:0 0 25px; }
+.archive-nav li a{ color:#FFF; text-decoration:none; }
 /* SP */
 @media only screen and (max-width:767px){
+  .g-nav__inner{ width:95%; justify-content:center; flex-wrap:wrap;  }
+  .g-nav__inner li{ width:calc(100% / 3);}
+  .g-nav__inner a{ font-size:12px; }
 
 }
 
@@ -73,6 +103,7 @@ a:hover{ opacity:0.8; }
 /*ボタン*/
 
 /*タイトル・見出し系（h2,h3,h4）*/
+.headline-white{ color:#FFF; font-size:18px; }
 
 /* ページネーション */
 .pagenation{ display:flex; justify-content:center; flex-wrap:wrap; align-items:center; width:100%; max-width:1080px; margin:0 auto; }
@@ -114,16 +145,19 @@ a:hover{ opacity:0.8; }
 /**********************/
 /* 投稿単体 */
 .single-content{ display:block; width:100%; max-width:1080px; margin:0 auto; }
-.single-content__headline{ position:relative; font-size:26px; font-weight:bold; color:#444; padding:15px 40px; border-bottom:2px solid #e4228e; }
-.single-content__headline:before{ content:''; width:20px; height:20px; position:absolute; top:0; bottom:0; left:0; margin:auto; background:#e4228e; border-radius:20px; }
-.single-content__headline:after{ content:''; width:20px; height:20px; position:absolute; top:0; bottom:0; right:0; margin:auto; background:#e4228e; border-radius:20px; }
-.single-content__date{ margin:15px 0; font-size:14px; color:#e4228e; }
+.single-content__headline{ position:relative; font-size:26px; font-weight:bold; color:#e4228e; padding:15px; border-bottom:2px solid #e4228e; }
+.single-content__date{ margin:15px 0; font-size:14px; color:#333; }
 .single-content__cat{ display:flex; justify-content:flex-start; align-items:stretch; flex-wrap:wrap; }
 .single-content__cat li{ margin:0 5px 5px 0; }
 .single-content__cat a{ display:block; font-size:12px; padding:8px 15px; background:#e4228e; color:#FFF; text-decoration:none; border-radius:15px; }
 .single-content__main{ margin:30px 0; }
 .single-content__main p{ font-size:17px; line-height:1.6; }
-.comment{ margin:60px 0 80px; }
+.nextprev-wrap{ display:flex; justify-content:space-between; align-items:stretch; margin:80px 0 0; padding:20px 0 0; border-top:1px solid #e4228e; }
+.nextprev{ font-size:16px; max-width:50%; padding:0 10px; box-sizing:border-box; }
+.nextprev--next{ text-align:right; }
+.nextprev a{ display:block; margin:5px 0 0; font-size:21px; color:#e4228e; text-decoration:none; }
+.sp-nextprev-wrap{ display:none; }
+.comment{ margin:80px 0 80px; }
 .comment-count{ margin:0 0 10px; font-size:16px; color:#E63828; }
 .comment-card{ width:100%; padding:15px 0; border-top:1px solid #333; }
 .comment-card__date{ margin:0 0 20px; font-size:14px; }
@@ -145,7 +179,12 @@ a:hover{ opacity:0.8; }
 
 /* SP */
 @media only screen and (max-width:767px){
-  .comment{ margin:60px 0; }
+  .single-content{ width:95%; }
+  .sp-nextprev-wrap{ display:block; }
+  .sp-nextprev{ position:fixed; z-index:100; }
+  .sp-nextprev a{ cursor:pointer; display:block; padding:40px 20px; background:rgba(228,34,142,0.7); font-size:34px; color:#FFF; text-decoration:none; transform:scale(0.6,1); }
+  .sp-nextprev--prev{ top:50%; left:-15px; }
+  .sp-nextprev--next{ top:50%; right:-15px; }
   .comment-form-item{ flex-wrap:wrap; margin:0 0 20px; }
   .comment-form__label{ width:100%; }
   .comment-form__input{ width:100%; margin:5px 0 0; }
