@@ -19,6 +19,7 @@ Template Name: TOPページ
       }
     //wordによってitemsの配列を変更する
     //同棲の時は親カテゴリまでさかのぼって「同棲」の語がカテゴリにある投稿だけ残す
+    //「同棲」の語がカテゴリにあって「毒親・毒兄弟」の語「自律神経失調症・不安症・発達障害」の語がカテゴリにない投稿だけ残す
     if($search_word !== '' && $search_word === 'dousei'):
       foreach($items as $key=>$item){
         $current_cat_list = '';
@@ -27,6 +28,12 @@ Template Name: TOPページ
           $current_cat_word = get_category_parents($current_cat->term_id);
           $current_cat_list = $current_cat_list . $current_cat_word;
           if(strpos($current_cat_list,'同棲') === false){
+            unset($items[$key]);
+          }
+          if(
+            strpos($current_cat_list,'毒親・毒兄弟') !== false ||
+            strpos($current_cat_list,'自律神経失調症・不安症・発達障害') !== false
+          ){
             unset($items[$key]);
           }
         }
@@ -77,14 +84,22 @@ Template Name: TOPページ
           <div class="postcard__thumb--dummy"></div>
           <?php endif; ?>
         </div>
-        <p class="postcard__content"><?php echo get_the_excerpt($items[$i]); ?></p>
+        <p class="postcard__content">
+          <?php
+            if(has_excerpt()){
+              echo get_the_excerpt($items[$i]);
+            }else{
+              echo mb_substr(strip_tags(get_post_field('post_content',$items[$i])), 0, 150 ) . '...[続きをよむ]';
+            }
+          ?>
+        </p>
       </a>
       <ul class="postcard__cat">
       <?php
         $post_cats = get_the_category($items[$i]);
         foreach($post_cats as $post_cat):
       ?>
-        <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $post_cat->name; ?>"><?php echo $post_cat->name; ?></a></li>
+        <li><a href="<?php echo get_category_link($post_cat->term_id); ?>"><?php echo $post_cat->name; ?></a></li>
       <?php endforeach; ?>
       </ul>
     </article>

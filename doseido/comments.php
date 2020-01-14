@@ -20,7 +20,7 @@
       <?php endif; ?>
       <p class="comment-card__text"><?php echo $comment->comment_content; ?></p>
       <p class="comment-card__author">[<span><?php echo $comment->comment_author; ?></span>]</p>
-      <a rel='nofollow' class='mt10 btn-gray' href='<?php echo $static_url[0]; ?>?replytocom=<?php echo $comment->comment_ID; ?>#respond' onclick='return addComment.moveForm( "div-comment-<?php $comment->comment_ID; ?>", "<?php $comment->comment_ID; ?>", "respond", "<?php echo $post->ID; ?>" )' aria-label='<?php echo $comment->comment_author; ?> に返信する'>返信する</a>
+      <a rel='nofollow' class='comment-card__return' href='<?php echo $static_url[0]; ?>?replytocom=<?php echo $comment->comment_ID; ?>#respond' onclick='return addComment.moveForm( "div-comment-<?php $comment->comment_ID; ?>", "<?php $comment->comment_ID; ?>", "respond", "<?php echo $post->ID; ?>" )' aria-label='<?php echo $comment->comment_author; ?> に返信する'>返信する</a>
     </article>
     <?php endforeach; ?>
   <?php endif; ?>
@@ -48,9 +48,9 @@
       <div class="comment-form-item comment-form-item--top">
         <label class="comment-form__label">コメント内容（必須）</label>
         <p class="comment-form__textarea"><textarea name="comment" aria-required="true"/></textarea></p>
-        <input name="submit" type="submit" class="comment-form__submit btn-red btn-red--small" value="&gt;&gt; 投稿" />
+        <input name="submit" type="submit" class="comment-form__submit" value="&gt;&gt; 投稿" />
       </div>
-      <p class="comment-form__submit">
+      <p class="comment-form__hidden">
         <input type='hidden' name='comment_post_ID' value='<?php echo $post->ID; ?>' />
         <input type='hidden' name='comment_parent' value='<?php echo $replay_to; ?>' />
       </p>

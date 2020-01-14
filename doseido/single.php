@@ -1,6 +1,11 @@
 <?php get_header(); ?>
 <main class="content">
     <article class="single-content">
+      <?php
+        if(have_posts()):
+          while (have_posts()):
+            the_post();
+      ?>
       <h2 class="single-content__headline"><?php echo the_title(); ?></h2>
       <p class="single-content__date"><?php echo get_the_date( 'Y年n月j日D曜日', $post->ID ); ?></p>
       <ul class="single-content__cat">
@@ -10,16 +15,15 @@
       <?php endforeach; ?>
       </ul>
       <section class="single-content__main">
-        <?php
-          if(have_posts()){
-            while (have_posts()){
-              the_post();
-              the_content();
-            }
-          } else {
-          	echo '<p>コンテンツがありません。</p>';
-          }
-        ?>
+        <?php the_content(); ?>
+      </section>
+      <section class="sns-area">
+        <h4 class="headline-slash">この記事をSNSで紹介してね</h3>
+        <div class="sns-wrap">
+          <a class="sns" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo the_title(); ?>@同棲do!?&url=<?php echo the_permalink(); ?>" rel="nofollow"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/twitter.png" alt=""></a>
+          <a class="sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo the_permalink(); ?>" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/facebook.png" alt=""></a>
+          <a class="sns" target="_blank" href="http://b.hatena.ne.jp/entry/<?php echo the_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/hatena.png" alt=""></a>
+        </div>
       </section>
       <section class="nextprev-wrap">
         <div class="nextprev nextprev--prev">
@@ -29,7 +33,7 @@
           <?php next_post_link('次の記事<br>%link '); ?>
         </div>
       </section>
-      <section class="sp-nextprev-wrap">
+      <section class="js-SpNextPrev sp-nextprev-wrap">
         <div class="sp-nextprev sp-nextprev--prev">
           <?php previous_post_link('%link','<'); ?>
         </div>
@@ -37,28 +41,18 @@
           <?php next_post_link('%link','>'); ?>
         </div>
       </section>
+      <section class="recommend-area">
+        <h4 class="headline-pinkbar">この記事に似た記事をみる</h4>
+        <div class="js-recommend recommend-wrap loader">
+        </div>
+      </section>
       <?php comments_template(); ?>
+      <?php
+          endwhile;
+        endif;
+      ?>
     </article>
 </main>
-<?php
-$title = get_the_title(get_the_ID());
-$title_split = str_split($title);
-$ids = get_posts(array(
-  'numberposts' => -1,
-  'post_type' => 'post',
-  'post_status' => 'publish',
-  'fields' => 'ids'
-));
-$recommends = array();
-foreach ($ids as $id) {
-  $other_title = get_the_title($id);
-  $other_title_split = str_split($other_title);
-  $equal_count = array_intersect($title_split,$other_title_split);
-  $recommends[$other_title] = count($equal_count);
-}
-arsort($recommends);
-var_dump($recommends);
-?>
 <script>
 jQuery(function($){
   $.ajax({
@@ -69,8 +63,8 @@ jQuery(function($){
       'id':<?php echo get_the_ID(); ?>
     },
     success: function( response ){
-      //var jsonData = JSON.parse( response );
-      alert(response);
+      $('.js-recommend').removeClass('loader');
+      $('.js-recommend').append(response);
     }
   });
 })

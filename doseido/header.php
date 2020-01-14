@@ -35,20 +35,21 @@
       <h3 class="headline-white">カテゴリ一覧</h3>
       <ul class="cat-nav">
       <?php
-        $categories = get_categories("type=post&orderby=term_group&order=asc&hide_empty=0");
+        $categories = get_categories("type=post&parent=0&order=asc&hide_empty=0");
         foreach($categories as $category):
       ?>
-        <?php
-          $parent_exist = $category->parent;
-          if($parent_exist === 0):
-        ?>
         <li class="cat-nav__first"><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $category->slug; ?>"><?php echo $category->name; ?></a>&nbsp;(<?php echo $category->count; ?>)</li>
-        <?php
-          else:
-          $parent_cat = get_category($parent_exist);
-        ?>
-          <li class="cat-nav__second"><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $parent_cat->slug; ?>/<?php echo $category->slug; ?>"><?php echo $category->name; ?></a>&nbsp;(<?php echo $category->count; ?>)</li>
-        <?php endif; ?>
+      <?php
+        $children = get_term_children($category->term_id,'category');
+        if(count($children) > 0):
+          foreach($children as $child):
+            $current_child = get_category($child);
+      ?>
+        <li class="cat-nav__second"><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $category->slug; ?>/<?php echo $current_child->slug; ?>"><?php echo $current_child->name; ?></a>&nbsp;(<?php echo $current_child->count; ?>)</li>
+      <?php
+          endforeach;
+        endif;
+      ?>
       <?php endforeach; ?>
       </ul>
     </div>

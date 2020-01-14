@@ -28,7 +28,7 @@ function twpp_change_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'twpp_change_excerpt_length', 999 );
 function twpp_change_excerpt_more( $more ) {
-  return '...[続きを読む]';
+  return '...[続きをよむ]';
 }
 add_filter( 'excerpt_more', 'twpp_change_excerpt_more' );
 
@@ -45,11 +45,53 @@ function add_my_ajaxurl(){
 }
 add_action( 'wp_head', 'add_my_ajaxurl', 1 );
 //レコメンドを呼び出すajaxを追加
+//post_idをもらい、整形したhtmlを返す
 function recommendCall(){
   $post_id = $_POST['id'];
-  $post_title = get_the_title($post_id);
-  echo $post_title;
-//  echo json_encode( $returnObj );
+  $html = '';
+  $title = get_the_title($post_id);
+  $title_split = str_split($title);
+  $ids = get_posts(array(
+    'numberposts' => -1,
+    'post_type' => 'post',
+    'post_status' => 'publish',
+    'fields' => 'ids'
+  ));
+  $recommends = array();
+  foreach ($ids as $id) {
+    $other_title = get_the_title($id);
+    $other_title_split = str_split($other_title);
+    $equal_count = array_intersect($title_split,$other_title_split);
+    $recommends[$id] = count($equal_count);
+  }
+  arsort($recommends);
+  $i = 0;
+  //$recommends[投稿id] = 一致数
+  //一致数スコア1位(0)はこの投稿自身なので除外。一致数2位(1)～4位(3)までをhtml要素にして返す
+  foreach($recommends as $key => $value ){
+    if($i === 0 && $value === 0){
+      $html = '<p class="no-recommend">似た記事はありませんでした。</p>';
+      break;
+    }
+    if($i > 0){
+      $html = $html . '<a class="recommend" href="' . get_permalink($key) . '">';
+      $html = $html . '<div class="recommend__thumb">';
+      if(get_the_post_thumbnail($key)){
+        $html = $html . '<img src="' . get_the_post_thumbnail_url($key, 'medium') . '" alt="">';
+      }else{
+        $html = $html . '<div class="recommend__thumb--dummy"></div>';
+      }
+      $html = $html . '</div>';
+      $html = $html . '<h5 class="recommend__title">' . get_the_title($key) . '</h5>';
+      $html = $html . '<div class="recommend__date">' . get_the_date('Y.m.d',$key) . '</div>';
+      $html = $html . '</a>';
+    }
+    if($i >= 3){
+      break;
+    }
+    $i++;
+  }
+  echo $html;
   die();
 }
 add_action( 'wp_ajax_recommendCall', 'recommendCall' );
