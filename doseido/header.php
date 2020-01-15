@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
-<title>ブログ</title>
 <meta name="description" content="同棲do!?">
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,11 +15,12 @@
   <h1 class="header-headline"><a href="<?php echo esc_url(home_url( '/' )); ?>">ブログ</a></h1>
   <nav class="g-nav">
     <ul class="g-nav__inner">
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>?word=dousei">同棲</a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/毒親・毒兄弟/">毒親・毒兄弟</a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/自律神経失調症・不安症・発達障害/">自律神経失調症・<br>不安症・発達障害</a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>?word=other">その他</a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>about">このブログについて</a></li>
+      <li><a href="<?php echo esc_url(home_url( '/' )); ?>?word=dousei"><div class="g-nav__icon"></div><span>同棲</span></a></li>
+      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/毒親・毒兄弟/"><div class="g-nav__icon"></div><span>毒親・毒兄弟</span></a></li>
+      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/自律神経失調症・不安症・発達障害/"><div class="g-nav__icon"></div><span>自律神経失調症・<br>不安症・発達障害</span></a></li>
+      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/ｊａ１１ジムニー/"><div class="g-nav__icon"></div><span>ジムニー</span></a></li>
+      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/誰かの役に立つかも？な雑学/"><div class="g-nav__icon"></div><span>豆知識</span></a></li>
+      <li><a href="<?php echo esc_url(home_url( '/' )); ?>about"><div class="g-nav__icon"></div><span>このブログについて</span></a></li>
     </ul>
   </nav>
   <div class="js-humbergerButton humberger-button">

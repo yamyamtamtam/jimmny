@@ -17,7 +17,43 @@ add_action( 'init', 'loadGoogleCdn' );
 ///////////////////////
 //****  管理画面 ****//
 ///////////////////////
+//サムネイル有効化
 add_theme_support( 'post-thumbnails' );
+
+function add_button_quicktag() {
+	?>
+	<script type="text/javascript">
+	QTags.addButton('code_balloon', 'ふきだし', '[code_balloon position="left" name="名前" text="本文" img="アイコン画像URL"]');
+	</script>
+	<?php
+}
+add_action('admin_print_footer_scripts', 'add_button_quicktag');
+function code_balloon_func($atts) {
+	extract( shortcode_atts( array(
+		'position' => '',
+		'img' => '',
+		'name' => '',
+		'text' => '',
+	), $atts ) );
+
+	$code_balloon = <<<EOT
+	<div class="balloon__contener">
+    <div class="balloon__$position">
+      <figure>
+        <img src="$img" />
+        <figcaption>$name</figcaption>
+      </figure>
+      <div class="balloon__text">
+        $text
+      </div>
+    </div>
+	</div>
+EOT;
+	return $code_balloon;
+
+}
+
+add_shortcode('code_balloon', 'code_balloon_func');
 
 ///////////////////////
 //***  表示の制御 ***//
@@ -35,6 +71,8 @@ add_filter( 'excerpt_more', 'twpp_change_excerpt_more' );
 ///////////////////////
 //***  処理の制御 ***//
 ///////////////////////
+//titleタグの出力
+add_theme_support( 'title-tag' );
 //ajaxurlを出力
 function add_my_ajaxurl(){
   echo '
