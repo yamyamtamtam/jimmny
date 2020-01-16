@@ -20,6 +20,7 @@
       <section class="sns-area">
         <h4 class="headline-slash">この記事をSNSで紹介してね</h3>
         <div class="sns-wrap">
+          <a class="sns" target="_blank" href="http://line.me/R/msg/text/?<?php echo the_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/line.png" alt=""></a>
           <a class="sns" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo the_title(); ?>@同棲do!?&url=<?php echo the_permalink(); ?>" rel="nofollow"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/twitter.png" alt=""></a>
           <a class="sns" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo the_permalink(); ?>" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/facebook.png" alt=""></a>
           <a class="sns" target="_blank" href="http://b.hatena.ne.jp/entry/<?php echo the_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/hatena.png" alt=""></a>
@@ -35,10 +36,10 @@
       </section>
       <section class="js-SpNextPrev sp-nextprev-wrap">
         <div class="sp-nextprev sp-nextprev--prev">
-          <?php previous_post_link('%link','<'); ?>
+          <?php previous_post_link('%link','<span>&lt;</span><br>前へ'); ?>
         </div>
         <div class="sp-nextprev sp-nextprev--next">
-          <?php next_post_link('%link','>'); ?>
+          <?php next_post_link('%link','<span>&gt;</span><br>次へ'); ?>
         </div>
       </section>
       <section class="recommend-area">

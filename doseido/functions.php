@@ -20,40 +20,19 @@ add_action( 'init', 'loadGoogleCdn' );
 //サムネイル有効化
 add_theme_support( 'post-thumbnails' );
 
-function add_button_quicktag() {
-	?>
-	<script type="text/javascript">
-	QTags.addButton('code_balloon', 'ふきだし', '[code_balloon position="left" name="名前" text="本文" img="アイコン画像URL"]');
-	</script>
-	<?php
-}
-add_action('admin_print_footer_scripts', 'add_button_quicktag');
-function code_balloon_func($atts) {
-	extract( shortcode_atts( array(
-		'position' => '',
-		'img' => '',
-		'name' => '',
-		'text' => '',
-	), $atts ) );
-
-	$code_balloon = <<<EOT
-	<div class="balloon__contener">
-    <div class="balloon__$position">
-      <figure>
-        <img src="$img" />
-        <figcaption>$name</figcaption>
-      </figure>
-      <div class="balloon__text">
-        $text
-      </div>
-    </div>
-	</div>
-EOT;
-	return $code_balloon;
-
+//ビジュアルエディタにボタンを追加
+add_filter( 'mce_external_plugins', 'add_original_tinymce_button_plugin' );
+function add_original_tinymce_button_plugin( $plugin_array ) {
+  $plugin_array[ 'original_tinymce_button_plugin' ] = get_template_directory_uri() . '/admin/editor-button.js';
+  return $plugin_array;
 }
 
-add_shortcode('code_balloon', 'code_balloon_func');
+add_filter( 'mce_buttons_2', 'add_original_tinymce_button' );
+function add_original_tinymce_button( $buttons ) {
+  $buttons = array('lineLeft','lineRight');
+  return $buttons;
+}
+add_editor_style( 'admin/editor-style.css' );
 
 ///////////////////////
 //***  表示の制御 ***//
@@ -64,7 +43,7 @@ function twpp_change_excerpt_length( $length ) {
 }
 add_filter( 'excerpt_length', 'twpp_change_excerpt_length', 999 );
 function twpp_change_excerpt_more( $more ) {
-  return '...[続きをよむ]';
+  return '<span class="text-grey-small">...続きをよむ</span>';
 }
 add_filter( 'excerpt_more', 'twpp_change_excerpt_more' );
 
@@ -98,7 +77,7 @@ function recommendCall(){
   $recommends = array();
   foreach ($ids as $id) {
     $other_title = get_the_title($id);
-    $other_title_split = str_split($other_title);
+    $other_title_split = array_slice(preg_split("//u", $other_title), 1, -1);
     $equal_count = array_intersect($title_split,$other_title_split);
     $recommends[$id] = count($equal_count);
   }
@@ -107,7 +86,7 @@ function recommendCall(){
   //$recommends[投稿id] = 一致数
   //一致数スコア1位(0)はこの投稿自身なので除外。一致数2位(1)～4位(3)までをhtml要素にして返す
   foreach($recommends as $key => $value ){
-    if($i === 0 && $value === 0){
+    if($i === 1 && $value === 0){
       $html = '<p class="no-recommend">似た記事はありませんでした。</p>';
       break;
     }

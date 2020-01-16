@@ -89,7 +89,7 @@ Template Name: TOPページ
             if(has_excerpt()){
               echo get_the_excerpt($items[$i]);
             }else{
-              echo mb_substr(strip_tags(get_post_field('post_content',$items[$i])), 0, 150 ) . '...[続きをよむ]';
+              echo mb_substr(strip_tags(get_post_field('post_content',$items[$i])), 0, 150 ) . '<span class="text-grey-small">...続きをよむ</span>';
             }
           ?>
         </p>

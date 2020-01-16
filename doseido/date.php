@@ -64,7 +64,15 @@ Template Name: カテゴリページ
           <div class="postcard__thumb--dummy"></div>
           <?php endif; ?>
         </div>
-        <p class="postcard__content"><?php echo get_the_excerpt($items[$i]); ?></p>
+        <p class="postcard__content">
+          <?php
+            if(has_excerpt()){
+              echo get_the_excerpt($items[$i]);
+            }else{
+              echo mb_substr(strip_tags(get_post_field('post_content',$items[$i])), 0, 150 ) . '<span class="text-grey-small">...続きをよむ</span>';
+            }
+          ?>
+        </p>
       </a>
       <ul class="postcard__cat">
       <?php

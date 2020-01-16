@@ -5,14 +5,6 @@ jQuery(function($){
 //TOPへ戻る
   var topBtn = $('.js-page-top');
   topBtn.hide();
-  //スクロールが500に達したらボタン表示
-  $(window).scroll(function () {
-    if ($(this).scrollTop() > 300) {
-      topBtn.fadeIn();
-    } else {
-      topBtn.fadeOut();
-    }
-  });
   //スルスルっとスクロールでトップへもどる
   topBtn.click(function () {
     $('body,html').animate({
@@ -26,18 +18,39 @@ jQuery(function($){
   $(".js-humbergerClose").click(function(){
     $(".humberger-nav").removeClass("humberger-nav--active");
   });
+  /*スクロールでなにかする系の動作*/
   var prevScroll;
   var currentScroll;
+  var commonScrollPosition;
+  var lineContent;
+  var lineContentPosition;
   $(".js-SpNextPrev").addClass("sp-nextprev-wrap--active");
   $(window).scroll(function(){
+    //TOPへ戻るボタン
+    if ($(this).scrollTop() > 300) {
+      topBtn.fadeIn();
+    } else {
+      topBtn.fadeOut();
+    }
+    //SP版の次へ前へボタン
     prevScroll = $(this).scrollTop();
-    console.log(prevScroll);
-    console.log(currentScroll);
     if(prevScroll < currentScroll){
       $(".js-SpNextPrev").addClass("sp-nextprev-wrap--active");
     }else{
       $(".js-SpNextPrev").removeClass("sp-nextprev-wrap--active");
     }
     currentScroll = prevScroll;
+    //LINE風
+    commonScrollPosition = $(document).scrollTop() + window.innerHeight - 120;
+    if($('.js-line')){
+      lineContent = $('.js-line');
+      for( var i=0; i<lineContent.length; i++) {
+        lineContentPosition = lineContent[i].offsetTop;
+        if(commonScrollPosition > lineContentPosition){
+          lineContent[i].classList.add('line--active');
+        }
+      }
+    }
+
   });
 })
