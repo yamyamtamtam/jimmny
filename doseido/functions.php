@@ -52,6 +52,44 @@ add_filter( 'excerpt_more', 'twpp_change_excerpt_more' );
 ///////////////////////
 //titleタグの出力
 add_theme_support( 'title-tag' );
+
+//カテゴリ名を入れるとclass名を出力する関数
+function categoryConvert($name){
+  $classname = 'other';
+  if(strpos($name,'同棲') !== false){
+    $classname = 'dousei';
+  }elseif($name == '毒親・毒兄弟'){
+    $classname = 'dokuoya';
+  }elseif($name == '自律神経失調症・不安症・発達障害'){
+    $classname = 'shougai';
+  }elseif(strpos($name,'ジムニー') !== false){
+    $classname = 'jimny';
+  }elseif($name == '誰かの役に立つかも？な雑学'){
+    $classname = 'zatsugaku';
+  }
+  return $classname;
+}
+//post_id名を入れると属するカテゴリの一覧からclass名を出力する関数（優先順位あり）
+function idToCategoryConvert($id){
+  $post_cats = get_the_category($id);
+  $cat_names = array();
+  $classname = 'dousei';
+  foreach($post_cats as $post_cat){
+    $cat_names[] = $post_cat->name;
+  }
+  if(in_array('毒親・毒兄弟',$cat_names,true)){
+    $classname = 'dokuoya';
+  }elseif(in_array('自律神経失調症・不安症・発達障害',$cat_names,true)){
+    $classname = 'shougai';
+  }elseif(in_array('ｊａ１１ジムニー',$cat_names,true)){
+    $classname = 'jimny';
+  }elseif(in_array('誰かの役に立つかも？な雑学',$cat_names,true)){
+    $classname = 'zatsugaku';
+  }
+  return $classname;
+}
+
+
 //ajaxurlを出力
 function add_my_ajaxurl(){
   echo '

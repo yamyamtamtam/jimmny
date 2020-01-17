@@ -61,7 +61,7 @@ Template Name: カテゴリページ
           <?php if(get_the_post_thumbnail($items[$i])): ?>
           <img src="<?php echo get_the_post_thumbnail( $items[$i], 'medium' ); ?>" alt="">
           <?php else: ?>
-          <div class="postcard__thumb--dummy"></div>
+          <div class="postcard__thumb--<?php echo idToCategoryConvert($items[$i]); ?>"></div>
           <?php endif; ?>
         </div>
         <p class="postcard__content">
@@ -79,7 +79,7 @@ Template Name: カテゴリページ
         $post_cats = get_the_category($items[$i]);
         foreach($post_cats as $post_cat):
       ?>
-        <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $post_cat->name; ?>"><?php echo $post_cat->name; ?></a></li>
+        <li><a class="cat-<?php echo categoryConvert($post_cat->name); ?> href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $post_cat->name; ?>"><?php echo $post_cat->name; ?></a></li>
       <?php endforeach; ?>
       </ul>
     </article>

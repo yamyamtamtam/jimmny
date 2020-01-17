@@ -11,7 +11,7 @@
       <ul class="single-content__cat">
       <?php $cats = get_the_category( $post->ID ); ?>
       <?php foreach($cats as $cat): ?>
-        <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $cat->name; ?>/"><?php echo $cat->name; ?></a></li>
+        <li><a class="cat-<?php echo categoryConvert($cat->name); ?>" href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $cat->name; ?>/"><?php echo $cat->name; ?></a></li>
       <?php endforeach; ?>
       </ul>
       <section class="single-content__main">

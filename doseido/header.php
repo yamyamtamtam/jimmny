@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> class="no-js no-svg">
 <head>
-<meta name="description" content="同棲do!?">
+<meta name="description" content="<?php bloginfo('description'); ?>">
 <meta charset="<?php bloginfo( 'charset' ); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="profile" href="http://gmpg.org/xfn/11">
@@ -12,15 +12,18 @@
 </head>
 <body <?php body_class(); ?>>
 <header class="header">
-  <h1 class="header-headline"><a href="<?php echo esc_url(home_url( '/' )); ?>">ブログ</a></h1>
+  <section class="header-top">
+    <h1 class="header-logo"><a href="<?php echo esc_url(home_url( '/' )); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="<?php bloginfo('name'); ?>"></a></h1>
+    <p class="header-description"><?php bloginfo('description'); ?></p>
+  </section>
   <nav class="g-nav">
     <ul class="g-nav__inner">
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>?word=dousei"><div class="g-nav__icon"></div><span>同棲</span></a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/毒親・毒兄弟/"><div class="g-nav__icon"></div><span>毒親・毒兄弟</span></a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/自律神経失調症・不安症・発達障害/"><div class="g-nav__icon"></div><span>自律神経失調症・<br>不安症・発達障害</span></a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/ｊａ１１ジムニー/"><div class="g-nav__icon"></div><span>ジムニー</span></a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>category/誰かの役に立つかも？な雑学/"><div class="g-nav__icon"></div><span>豆知識</span></a></li>
-      <li><a href="<?php echo esc_url(home_url( '/' )); ?>about"><div class="g-nav__icon"></div><span>このブログについて</span></a></li>
+      <li class="g-nav__item g-nav__item--dousei"><a href="<?php echo esc_url(home_url( '/' )); ?>?word=dousei"><div class="g-nav__icon g-nav__icon--dousei"></div><span>同棲</span></a></li>
+      <li class="g-nav__item g-nav__item--dokuoya"><a href="<?php echo esc_url(home_url( '/' )); ?>category/毒親・毒兄弟/"><div class="g-nav__icon g-nav__icon--dokuoya"></div><span>毒親・毒兄弟</span></a></li>
+      <li class="g-nav__item g-nav__item--shougai"><a href="<?php echo esc_url(home_url( '/' )); ?>category/自律神経失調症・不安症・発達障害/"><div class="g-nav__icon g-nav__icon--shougai"></div><span>自律神経失調症・<br>不安症・発達障害</span></a></li>
+      <li class="g-nav__item g-nav__item--jimny"><a href="<?php echo esc_url(home_url( '/' )); ?>category/ｊａ１１ジムニー/"><div class="g-nav__icon g-nav__icon--jimny"></div><span>ジムニー</span></a></li>
+      <li class="g-nav__item g-nav__item--zatsugaku"><a href="<?php echo esc_url(home_url( '/' )); ?>category/誰かの役に立つかも？な雑学/"><div class="g-nav__icon g-nav__icon--zatsugaku"></div><span>豆知識</span></a></li>
+      <li class="g-nav__item g-nav__item--about"><a href="<?php echo esc_url(home_url( '/' )); ?>about"><div class="g-nav__icon g-nav__icon--about"></div><span>このブログについて</span></a></li>
     </ul>
   </nav>
   <div class="js-humbergerButton humberger-button">
