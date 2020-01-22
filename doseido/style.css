@@ -200,8 +200,9 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 .nextprev--next{ text-align:right; }
 .nextprev a{ display:block; margin:5px 0 0; font-size:21px; color:#ff4dbf; text-decoration:none; }
 .sp-nextprev-wrap{ display:none; }
-.recommend-wrap{ display:flex; justify-content:space-between; }
-.recommend{ width:32%; box-shadow:0 0 6px #DDD; border-radius:2px; color:#333; text-decoration:none; }
+.recommend-wrap{ display:flex; justify-content:flex-start; }
+.recommend{ width:32%; margin:0 2% 0 0; box-shadow:0 0 6px #DDD; border-radius:2px; color:#333; text-decoration:none; }
+.recommend:last-of-type{ margin:0; }
 .recommend__thumb{ max-width:100%; text-align:center; }
 .recommend__thumb--dummy{ display:block; width:100%; background:#DDD; height:160px; }
 .recommend__thumb img{ max-width:100%; }
@@ -234,7 +235,9 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 .single-content__main p{ font-size:16px; line-height:2.0; letter-spacing:0.8px; }
 .single-content__main strong{ background: linear-gradient(transparent 65%, rgba(255,64,219,0.3) 65%); }
 .single-content__main a{ font-size:16px; line-height:2.0; letter-spacing:0.8px; color:#ff4dbf; text-decoration:none; }
-.single-content__main h3{ margin:40px 0 20px; padding:0 0 0 10px; font-size:22px; letter-spacing:1px; line-height:1.4; color:#ff4dbf; border-left:6px solid #ff4dbf; }
+.single-content__main h3{ position:relative; margin:60px 0 20px; padding:0 0 15px 30px; font-size:22px; font-weight:bold; letter-spacing:1px; line-height:1.4; color:#ff4dbf; border-bottom:2px solid #ff4dbf; }
+.single-content__main h3 span{ position:relative; z-index:1; }
+.single-content__main h3:after{ content:''; position:absolute; top:-30px; left:0; z-index:0; display:block; width:70px; height:70px; background:url(./assets/images/headline-bg.png); background-size:cover; }
 .single-content__main h4{ margin:40px 0 20px; font-size:18px; letter-spacing:1px; line-height:1.4; font-weight:bold; }
 .single-content__main iframe{ max-width:100%; margin:20px 0; }
 .single-content__main img{ max-width:100%; }
@@ -306,4 +309,4 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 .cat-shougai{ background:#17ba7f!important; }
 .cat-jimny{ background:#3a3adb!important; }
 .cat-zatsugaku{ background:#ffca55!important; }
-.cat-other{ background:#5eaacc!important; }
+.cat-other{ background:#ff5757!important; }

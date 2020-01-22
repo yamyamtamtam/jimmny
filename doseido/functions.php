@@ -105,7 +105,7 @@ function recommendCall(){
   $post_id = $_POST['id'];
   $html = '';
   $title = get_the_title($post_id);
-  $title_split = str_split($title);
+  $title_split = array_slice(preg_split("//u", $title), 1, -1);
   $ids = get_posts(array(
     'numberposts' => -1,
     'post_type' => 'post',
@@ -128,7 +128,7 @@ function recommendCall(){
       $html = '<p class="no-recommend">似た記事はありませんでした。</p>';
       break;
     }
-    if($i > 0){
+    if($i > 0 && $value !== 0){
       $html = $html . '<a class="recommend" href="' . get_permalink($key) . '">';
       $html = $html . '<div class="recommend__thumb">';
       if(get_the_post_thumbnail($key)){
