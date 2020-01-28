@@ -65,7 +65,7 @@ Template Name: カテゴリページ
         $post_cats = get_the_category($items[$i]);
         foreach($post_cats as $post_cat):
       ?>
-        <li><a class="cat-<?php echo categoryConvert($post_cat->name); ?> href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $post_cat->name; ?>"><?php echo $post_cat->name; ?></a></li>
+        <li><a class="cat-<?php echo categoryConvert($post_cat->name); ?>" href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $post_cat->name; ?>"><?php echo $post_cat->name; ?></a></li>
       <?php endforeach; ?>
       </ul>
     </article>

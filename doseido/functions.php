@@ -134,7 +134,7 @@ function recommendCall(){
       if(get_the_post_thumbnail($key)){
         $html = $html . '<img src="' . get_the_post_thumbnail_url($key, 'medium') . '" alt="">';
       }else{
-        $html = $html . '<div class="recommend__thumb--dummy"></div>';
+        $html = $html . '<div class="recommend__thumb--dummy postcard__thumb--' . idToCategoryConvert($key) . '"></div>';
       }
       $html = $html . '</div>';
       $html = $html . '<h5 class="recommend__title">' . get_the_title($key) . '</h5>';
