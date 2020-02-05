@@ -78,10 +78,12 @@ Template Name: TOPページ
         <h2 class="postcard__title"><?php echo get_the_title($items[$i]); ?><!--<span class="postcard__guide">をよむ</span>--></h2>
         <p class="postcard__date"><?php echo get_the_date('Y年m月d日', $items[$i]); ?></p>
         <div class="postcard__thumb">
+          <div class="postcard__curtain"></div>
+          <div class="postcard__curtain postcard__curtain--reverse"></div>
           <?php if(get_the_post_thumbnail($items[$i])): ?>
           <img src="<?php echo get_the_post_thumbnail_url( $items[$i], 'medium' ); ?>" alt="">
           <?php else: ?>
-          <div class="postcard__thumb--<?php echo idToCategoryConvert($items[$i]); ?>"></div>
+          <div class="postcard__thumb--dummy postcard__thumb--<?php echo idToCategoryConvert($items[$i]); ?>"></div>
           <?php endif; ?>
         </div>
         <p class="postcard__content">
