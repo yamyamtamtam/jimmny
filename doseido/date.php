@@ -50,7 +50,7 @@ Template Name: カテゴリページ
         $count = $page_count - $number_in_page_logic;
       }
   ?>
-  <section class="postlist">
+  <section class="postlist js-postcard">
     <?php for($i = $count; $i <= $page_count; $i++): ?>
       <?php if($items[$i]): ?>
     <article class="postcard">

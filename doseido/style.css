@@ -25,7 +25,12 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 .nocontent{ text-align:center; font-size:16px; }
 /*記事カード*/
 .postlist{ display:flex; justify-content:flex-start; align-items:stretch; flex-wrap:wrap; width:100%; max-width:1080px; margin:0 auto; }
-.postcard{ width:calc(100% / 3 - 20px); margin:0 30px 30px 0; background:#FFF; box-shadow:0 0 6px #DDD; border-radius:2px; }
+.postcard{ opacity:0; width:calc(100% / 3 - 20px); margin:0 30px 30px 0; background:#FFF; box-shadow:0 0 6px #DDD; border-radius:2px; }
+.postcard--active{ position:relative; animation:postcardAppear 0.6s ease-in-out forwards; }
+@keyframes postcardAppear{
+  0% { opacity:0; top:-10px; }
+  100% { opacity:1; top:0; }
+}
 .postcard:nth-of-type(3n){ margin:0 0 30px 0; }
 .postcard a{ color:#444; text-decoration:none; }
 .postcard a:hover .postcard__thumb img{ transform-origin:left; animation:windowOpen 0.3s ease-in-out forwards; }
@@ -184,8 +189,9 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 /**********************/
 /****** フッター ******/
 /**********************/
-.footer{ width:100%; padding:10px 0; background:#ff4dbf; }
-.copyright{ color:#FFF; text-align:center; font-size:11px; }
+.footer{ width:100%; }
+.footer__kadan{ width:100%; height:100px; background:url(./assets/images/kadan.png) repeat-x; }
+.copyright{ padding:10px 0; background:#ff4dbf; color:#FFF; text-align:center; font-size:11px; }
 /* SP */
 @media only screen and (max-width:767px){
 }
@@ -332,7 +338,7 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
   .nextprev-wrap{ margin:80px auto 0; padding:20px 10px 0; }
   .recommend-wrap{ max-width:90%; margin:0 auto; padding:0; }
   .sns-wrap{ max-width:90%; margin:0 auto; padding:0; }
-  .comment{ max-width:90%; margin:80px auto; }
+  .comment{ max-width:90%; margin:80px auto 0; }
 
 /*  .single-content__headline{ padding:15px 0; }*/
   .line-left{ width:90%; }

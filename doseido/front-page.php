@@ -73,7 +73,7 @@ Template Name: TOPページ
   <section class="postlist">
     <?php for($i = $count; $i <= $page_count; $i++): ?>
       <?php if($items[$i]): ?>
-    <article class="postcard">
+    <article class="postcard js-postcard">
       <a href="<?php echo get_permalink($items[$i]); ?>">
         <h2 class="postcard__title"><?php echo get_the_title($items[$i]); ?><!--<span class="postcard__guide">をよむ</span>--></h2>
         <p class="postcard__date"><?php echo get_the_date('Y年m月d日', $items[$i]); ?></p>

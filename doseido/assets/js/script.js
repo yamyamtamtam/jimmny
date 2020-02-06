@@ -24,6 +24,9 @@ jQuery(function($){
   var commonScrollPosition;
   var lineContent;
   var lineContentPosition;
+  var postcardContent;
+  var postcardContentPosition;
+  var postcardItem;
   $(".js-SpNextPrev").addClass("sp-nextprev-wrap--active");
   $(window).scroll(function(){
     //TOPへ戻るボタン
@@ -48,6 +51,17 @@ jQuery(function($){
         lineContentPosition = lineContent[i].offsetTop;
         if(commonScrollPosition > lineContentPosition){
           lineContent[i].classList.add('line--active');
+        }
+      }
+    }
+    //記事リストを動かす
+    if($('.js-postcard')){
+      postcardContent = $('.js-postcard');
+      for( var i=0; i<postcardContent.length; i++) {
+        postcardItem = postcardContent[i];
+        postcardContentPosition = postcardItem.offsetTop;
+        if(commonScrollPosition > postcardContentPosition){
+          postcardItem.classList.add('postcard--active');
         }
       }
     }
