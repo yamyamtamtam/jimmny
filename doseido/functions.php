@@ -20,6 +20,13 @@ add_action( 'init', 'loadGoogleCdn' );
 //サムネイル有効化
 add_theme_support( 'post-thumbnails' );
 
+//ビジュアルエディタからいらないタグを削除（h1とか）
+function custom_tinyMCEeditor_settings($initArray) {
+    $initArray['block_formats'] = "中見出し(h3)=h3; 小見出し(h4)=h4; 段落=p;";
+    return $initArray;
+}
+add_filter( 'tiny_mce_before_init', 'custom_tinyMCEeditor_settings' );
+
 //ビジュアルエディタにボタンを追加
 add_filter( 'mce_external_plugins', 'add_original_tinymce_button_plugin' );
 function add_original_tinymce_button_plugin( $plugin_array ) {
@@ -137,7 +144,7 @@ function recommendCall(){
         $html = $html . '<div class="recommend__thumb--dummy postcard__thumb--' . idToCategoryConvert($key) . '"></div>';
       }
       $html = $html . '</div>';
-      $html = $html . '<h5 class="recommend__title">' . get_the_title($key) . '</h5>';
+      $html = $html . '<p class="recommend__title">' . get_the_title($key) . '</p>';
       $html = $html . '<div class="recommend__date">' . get_the_date('Y.m.d',$key) . '</div>';
       $html = $html . '</a>';
     }

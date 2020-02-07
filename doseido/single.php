@@ -18,7 +18,7 @@
         <?php the_content(); ?>
       </section>
       <section class="sns-area">
-        <h4 class="headline-slash">この記事をSNSで紹介してね</h3>
+        <h5 class="headline-slash">この記事をSNSで紹介してね</h5>
         <div class="sns-wrap">
           <a class="sns" target="_blank" href="http://line.me/R/msg/text/?<?php echo the_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/line.png" alt=""></a>
           <a class="sns" target="_blank" href="https://twitter.com/intent/tweet?text=<?php echo the_title(); ?>@同棲do!?&url=<?php echo the_permalink(); ?>" rel="nofollow"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/twitter.png" alt=""></a>
@@ -43,7 +43,7 @@
         </div>
       </section>
       <section class="recommend-area">
-        <h4 class="headline-pinkbar">この記事に似た記事をみる</h4>
+        <h5 class="headline-pinkbar">この記事に似た記事をみる</h5>
         <div class="js-recommend recommend-wrap loader">
         </div>
       </section>

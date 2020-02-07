@@ -63,7 +63,7 @@ Template Name: カテゴリページ
           <?php if(get_the_post_thumbnail($items[$i])): ?>
           <img src="<?php echo get_the_post_thumbnail( $items[$i], 'medium' ); ?>" alt="">
           <?php else: ?>
-          <div class="postcard__thumb--<?php echo idToCategoryConvert($items[$i]); ?>"></div>
+          <div class="postcard__thumb--dummy postcard__thumb--<?php echo idToCategoryConvert($items[$i]); ?>"></div>
           <?php endif; ?>
         </div>
         <p class="postcard__content">
