@@ -948,12 +948,12 @@ ol, ul{
 
 /*レスポンシブ用*/
 /*----SP----*/
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 767px) {
 .pc{ display:none!important; }
 }
 
 
 /*----PC----*/
-@media screen and (min-width: 481px) {
+@media screen and (min-width: 768px) {
 .sp { display:none!important; }
 }

@@ -13,17 +13,17 @@
 <body <?php body_class(); ?>>
 <header class="header">
   <section class="header-top">
-    <h1 class="header-logo"><a href="<?php echo esc_url(home_url( '/' )); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="<?php bloginfo('name'); ?>"></a></h1>
+    <h1 class="header-logo"><a href="<?php echo esc_url(home_url( '/' )); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-swing.png" alt="<?php bloginfo('name'); ?>"></a></h1>
     <p class="header-description"><?php bloginfo('description'); ?></p>
   </section>
   <nav class="g-nav">
     <ul class="g-nav__inner">
       <li class="g-nav__item g-nav__item--dousei"><a href="<?php echo esc_url(home_url( '/' )); ?>?word=dousei"><div class="g-nav__icon g-nav__icon--dousei"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/dousei.png" alt=""></div><span>同棲</span></a></li>
-      <li class="g-nav__item g-nav__item--dokuoya"><a href="<?php echo esc_url(home_url( '/' )); ?>category/毒親・毒兄弟/"><div class="g-nav__icon g-nav__icon--dokuoya"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/doku.png" alt=""></div><span>毒親・毒兄弟</span></a></li>
-      <li class="g-nav__item g-nav__item--shougai"><a href="<?php echo esc_url(home_url( '/' )); ?>category/自律神経失調症・不安症・発達障害/"><div class="g-nav__icon g-nav__icon--shougai"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/syougai.png" alt=""></div><span>自律神経失調症・<br>不安症・発達障害</span></a></li>
+      <li class="g-nav__item g-nav__item--dokuoya"><a href="<?php echo esc_url(home_url( '/' )); ?>category/毒親・毒兄弟/"><div class="g-nav__icon g-nav__icon--dokuoya"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/doku.png" alt=""></div><span class="pc">毒親・毒兄弟</span><span class="sp">毒家族</span></a></li>
+      <li class="g-nav__item g-nav__item--shougai"><a href="<?php echo esc_url(home_url( '/' )); ?>category/自律神経失調症・不安症・発達障害/"><div class="g-nav__icon g-nav__icon--shougai"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/syougai.png" alt=""></div><span class="pc">自律神経失調症・<br>不安症・発達障害</span><span class="sp">メンタル</span></a></li>
       <li class="g-nav__item g-nav__item--jimny"><a href="<?php echo esc_url(home_url( '/' )); ?>category/ｊａ１１ジムニー/"><div class="g-nav__icon g-nav__icon--jimny"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/jimny.png" alt=""></div><span>ジムニー</span></a></li>
       <li class="g-nav__item g-nav__item--zatsugaku"><a href="<?php echo esc_url(home_url( '/' )); ?>category/誰かの役に立つかも？な雑学/"><div class="g-nav__icon g-nav__icon--zatsugaku"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/mame.png" alt=""></div><span>豆知識</span></a></li>
-      <li class="g-nav__item g-nav__item--about"><a href="<?php echo esc_url(home_url( '/' )); ?>about"><div class="g-nav__icon g-nav__icon--about"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/aboutus.png" alt=""></div><span>このブログについて</span></a></li>
+      <li class="g-nav__item g-nav__item--about"><a href="<?php echo esc_url(home_url( '/' )); ?>about"><div class="g-nav__icon g-nav__icon--about"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/aboutus.png" alt=""></div><span class="pc">このブログについて</span><span class="sp">ABOUT</span></a></li>
     </ul>
   </nav>
   <div class="js-humbergerButton humberger-button">

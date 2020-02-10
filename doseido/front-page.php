@@ -75,8 +75,10 @@ Template Name: TOPページ
       <?php if($items[$i]): ?>
     <article class="postcard js-postcard">
       <a href="<?php echo get_permalink($items[$i]); ?>">
-        <h2 class="postcard__title"><?php echo get_the_title($items[$i]); ?><!--<span class="postcard__guide">をよむ</span>--></h2>
-        <p class="postcard__date"><?php echo get_the_date('Y年m月d日', $items[$i]); ?></p>
+        <div class="postcard__shade">
+          <h2 class="postcard__title"><?php echo get_the_title($items[$i]); ?></h2>
+          <p class="postcard__date"><?php echo get_the_date('Y年m月d日', $items[$i]); ?></p>
+        </div>
         <div class="postcard__thumb">
           <div class="postcard__curtain"></div>
           <div class="postcard__curtain postcard__curtain--reverse"></div>
