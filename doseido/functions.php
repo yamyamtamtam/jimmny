@@ -46,7 +46,7 @@ add_editor_style( 'admin/editor-style.css' );
 ///////////////////////
 //抜粋の制御
 function twpp_change_excerpt_length( $length ) {
-  return 150;
+  return 50;
 }
 add_filter( 'excerpt_length', 'twpp_change_excerpt_length', 999 );
 function twpp_change_excerpt_more( $more ) {
@@ -96,6 +96,12 @@ function idToCategoryConvert($id){
   return $classname;
 }
 
+/*ランダムに傾きのstyle属性を出力*/
+function randomRotate(){
+  $style = 'style="transform:rotateZ(' . rand(1, 10) . 'deg)"';
+  echo $style;
+}
+
 
 //ajaxurlを出力
 function add_my_ajaxurl(){
@@ -112,6 +118,11 @@ function recommendCall(){
   $post_id = $_POST['id'];
   $html = '';
   $title = get_the_title($post_id);
+  $post_cats_objects = get_the_category($post_id);
+  $post_cats = array();
+  foreach($post_cats_objects as $post_cats_obj){
+    array_push($post_cats,$post_cats_obj->term_id);
+  }
   $title_split = array_slice(preg_split("//u", $title), 1, -1);
   $ids = get_posts(array(
     'numberposts' => -1,
@@ -121,14 +132,22 @@ function recommendCall(){
   ));
   $recommends = array();
   foreach ($ids as $id) {
+    /*今の投稿と全投稿のうちのn個目の投稿のタイトルの文字数の一致の数を取る*/
     $other_title = get_the_title($id);
     $other_title_split = array_slice(preg_split("//u", $other_title), 1, -1);
-    $equal_count = array_intersect($title_split,$other_title_split);
-    $recommends[$id] = count($equal_count);
+    $equal_count_post = array_intersect($title_split,$other_title_split);
+    /*今の投稿と全投稿のうちのn個目の投稿のカテゴリ数の一致の数を取る*/
+    $other_cats_objects = get_the_category($id);
+    $other_cats = array();
+    foreach($other_cats_objects as $other_cats_obj){
+      array_push($other_cats,$other_cats_obj->term_id);
+    }
+    $equal_count_cat = array_intersect($post_cats,$other_cats);
+    $recommends[$id] = count($equal_count_post) + ( count($equal_count_cat) * 2 );
   }
   arsort($recommends);
   $i = 0;
-  //$recommends[投稿id] = 一致数
+  //$recommends[投稿id] = 投稿タイトルの一致文字数 + (カテゴリidの一致数 * 2)
   //一致数スコア1位(0)はこの投稿自身なので除外。一致数2位(1)～4位(3)までをhtml要素にして返す
   foreach($recommends as $key => $value ){
     if($i === 1 && $value === 0){
