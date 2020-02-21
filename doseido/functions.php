@@ -36,7 +36,7 @@ function add_original_tinymce_button_plugin( $plugin_array ) {
 
 add_filter( 'mce_buttons_2', 'add_original_tinymce_button' );
 function add_original_tinymce_button( $buttons ) {
-  $buttons = array('lineLeft','lineRight');
+  $buttons = array('lineLeft','lineRight','markerYellow','markerPink');
   return $buttons;
 }
 add_editor_style( 'admin/editor-style.css' );

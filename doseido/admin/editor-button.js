@@ -78,6 +78,26 @@
           }
         });
       });
+      ed.addButton( 'markerYellow', {
+        title: '黄色マーカー',
+        image: url + '/marker-yellow.png',
+        cmd: 'marker_yellow'
+      });
+      ed.addCommand( 'marker_yellow', function() {
+        var selected_text = ed.selection.getContent();
+        var return_text = '<strong class="undeline-yellow">' + selected_text + '</strong>';
+        ed.insertContent(return_text);
+      });
+      ed.addButton( 'markerPink', {
+        title: 'ピンクマーカー',
+        image: url + '/marker-pink.png',
+        cmd: 'marker_pink'
+      });
+      ed.addCommand( 'marker_pink', function() {
+        var selected_text = ed.selection.getContent();
+        var return_text = '<strong class="undeline-pink">' + selected_text + '</strong>';
+        ed.insertContent(return_text);
+      });
     }
   });
   tinymce.PluginManager.add( 'original_tinymce_button_plugin', tinymce.plugins.original_tinymce_button );

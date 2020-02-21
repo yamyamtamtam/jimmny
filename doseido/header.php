@@ -37,33 +37,39 @@
   </div>
   <nav class="humberger-nav">
     <div class="js-humbergerClose humberger-nav__close">×</div>
-    <div class="cat-nav-wrap">
-      <h3 class="headline-white">カテゴリ一覧</h3>
-      <ul class="cat-nav">
-      <?php
-        $categories = get_categories("type=post&parent=0&order=asc&hide_empty=0");
-        foreach($categories as $category):
-      ?>
-        <li class="cat-nav__first"><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $category->slug; ?>"><?php echo $category->name; ?></a>&nbsp;(<?php echo $category->count; ?>)</li>
-      <?php
-        $children = get_term_children($category->term_id,'category');
-        if(count($children) > 0):
-          foreach($children as $child):
-            $current_child = get_category($child);
-      ?>
-        <li class="cat-nav__second"><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $category->slug; ?>/<?php echo $current_child->slug; ?>"><?php echo $current_child->name; ?></a>&nbsp;(<?php echo $current_child->count; ?>)</li>
-      <?php
-          endforeach;
-        endif;
-      ?>
-      <?php endforeach; ?>
-      </ul>
-    </div>
-    <div class="archive-nav-wrap">
-      <h3 class="headline-white">月別アーカイブ</h3>
-      <ul class="archive-nav">
-        <?php wp_get_archives("type=monthly&show_post_count=true"); ?>
-      </ul>
+    <form class="searchform" method="get" action="<?php echo esc_url(home_url( '/' )); ?>">
+      <input class="searchform__text" type="text" name="s" placeholder="キーワードを入力してね" />
+      <button class="searchform__button" type="submit"></button>
+    </form>
+    <div class="humberger-nav__column">
+      <div class="cat-nav-wrap">
+        <h3 class="headline-white">カテゴリ一覧</h3>
+        <ul class="cat-nav">
+        <?php
+          $categories = get_categories("type=post&parent=0&order=asc&hide_empty=0");
+          foreach($categories as $category):
+        ?>
+          <li class="cat-nav__first"><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $category->slug; ?>"><?php echo $category->name; ?></a>&nbsp;(<?php echo $category->count; ?>)</li>
+        <?php
+          $children = get_term_children($category->term_id,'category');
+          if(count($children) > 0):
+            foreach($children as $child):
+              $current_child = get_category($child);
+        ?>
+          <li class="cat-nav__second"><a href="<?php echo esc_url(home_url( '/' )); ?>category/<?php echo $category->slug; ?>/<?php echo $current_child->slug; ?>"><?php echo $current_child->name; ?></a>&nbsp;(<?php echo $current_child->count; ?>)</li>
+        <?php
+            endforeach;
+          endif;
+        ?>
+        <?php endforeach; ?>
+        </ul>
+      </div>
+      <div class="archive-nav-wrap">
+        <h3 class="headline-white">月別アーカイブ</h3>
+        <ul class="archive-nav">
+          <?php wp_get_archives("type=monthly&show_post_count=true"); ?>
+        </ul>
+      </div>
     </div>
   </nav>
 </header>
