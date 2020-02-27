@@ -10,7 +10,41 @@
           <?php if(get_the_post_thumbnail($items[$i])): ?>
           <img src="<?php echo get_the_post_thumbnail_url( $items[$i], 'medium' ); ?>" alt="">
           <?php else: ?>
-          <div class="postcard__thumb--dummy postcard__thumb--<?php echo idToCategoryConvert($items[$i]); ?>"></div>
+            <?php
+              $window_num = rand(1,3);
+              $decoration_num = rand(1,5);
+              switch ($window_num) {
+                case 1:
+                  $window_bg = 'normal';
+                  break;
+                case 2:
+                  $window_bg = 'flower01';
+                  break;
+                case 3:
+                  $window_bg = 'flower02';
+                  break;
+              }
+              switch ($decoration_num) {
+                case 1:
+                  $decoration_obj = 'leaf';
+                  break;
+                case 2:
+                  $decoration_obj = 'flower01';
+                  break;
+                case 3:
+                  $decoration_obj = 'bird';
+                  break;
+                case 4:
+                  $decoration_obj = 'flower02';
+                  break;
+                case 5:
+                  $decoration_obj = 'teruteru';
+                  break;
+                }
+            ?>
+          <div class="postcard__thumb--dummy postcard__thumb--<?php echo $window_bg; ?> postcard__thumb--<?php echo idToCategoryConvert($items[$i]); ?>">
+            <div class="postcard__decoration postcard__decoration--<?php echo $decoration_obj; ?>"></div>
+          </div>
           <?php endif; ?>
         </div>
         <p class="postcard__content">

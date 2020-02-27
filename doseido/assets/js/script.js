@@ -101,11 +101,11 @@ jQuery(function($){
         h4offsetTop = h4elements[n].offsetTop;
         if(h4offsetTop > h3offsetTop){
           $('.single-content__main h4:eq(' + n + ') .h3-clone-headline').remove();
-          $('.single-content__main h4:eq(' + n + ')').prepend('<span class="h3-clone-headline">～' + h3elements[i].textContent + '～</span>');
+          $('.single-content__main h4:eq(' + n + ')').prepend('<span class="h3-clone-headline">↓ ' + h3elements[i].textContent + '</span>');
         }
       }
     }
   }
 
-  
+
 })
