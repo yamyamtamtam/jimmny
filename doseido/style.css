@@ -22,7 +22,7 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 .nocontent{ text-align:left; font-size:14px; }
 /*記事カード*/
 .postlist{ display:flex; justify-content:flex-start; align-items:stretch; flex-wrap:wrap; width:100%; max-width:1080px; margin:0 auto; }
-.postcard{ opacity:0; width:calc(100% / 3 - 20px); margin:0 30px 30px 0; background:#FFF; box-shadow:0 0 6px #CCC; border-radius:10px; }
+.postcard{ opacity:0; width:calc(100% / 3 - 20px); margin:0 30px 30px 0; background:#FFF; border:1px solid #DDD; border-radius:10px; }
 .postcard--active{ position:relative; animation:postcardAppear 0.6s ease-in-out forwards; }
 @keyframes postcardAppear{
   0% { opacity:0; top:-10px; }
@@ -34,23 +34,29 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 .postcard__title{ font-size:21px; padding:15px 15px 10px; color:#ff4dbf; font-weight:bold; line-height:1.2; text-shadow:0 0 2px #FFF; word-break:break-all; }
 .postcard__date{ font-size:12px; padding:0 15px 10px; color:#0a3e5b; }
 .postcard__thumb{ position:relative; z-index:0; width:100%; height:200px; }
+.postcard__thumb--exist{ overflow:hidden; }
 .postcard__curtain{ position:relative; z-index:2; background:url(./assets/images/curtain.png) no-repeat; position:absolute; top:-5px; left:0; width:66px; height:200px; }
 .postcard__curtain--reverse{ left:auto; right:0; transform: scale(-1, 1); }
 .postcard__thumb img{ position:absolute; top:0; right:0; left:0; width:100%; margin:auto; }
 .postcard__thumb--dummy{ border-bottom:7px solid rgba(255,255,255,0.8); box-sizing:border-box; }
-.postcard__thumb--dummy:before{ content:''; position:absolute; z-index:1; top:0; left:0; right:0; margin:auto; width:4px; height:100%; background:rgba(255,255,255,0.3); }
-.postcard__thumb--dummy:after{ content:''; position:absolute; z-index:1; top:0; bottom:0; right:0; margin:auto; width:100%; height:4px; background:rgba(255,255,255,0.3); }
+.postcard__thumb--normal:before{ content:''; position:absolute; z-index:1; top:0; left:0; right:0; margin:auto; width:4px; height:100%; background:rgba(255,255,255,0.3); }
+.postcard__thumb--normal:after{ content:''; position:absolute; z-index:1; top:0; bottom:0; right:0; margin:auto; width:100%; height:4px; background:rgba(255,255,255,0.3); }
+.postcard__thumb--arabesque01{ background-image:url(./assets/images/window-arabesque01.png); background-position:center center; }
+.postcard__thumb--arabesque02{ background-image:url(./assets/images/window-arabesque02.png); background-position:center center; }
+.postcard__thumb--damask01{ background-image:url(./assets/images/window-damask01.png); background-position:center center; }
+.postcard__thumb--damask02{ background-image:url(./assets/images/window-damask02.png); background-position:center center; }
 .postcard__decoration--leaf{ position:absolute; display:block; z-index:3; bottom:-30px; left:-20px; width:260px; height:177px; background:url(./assets/images/decoration-leaf.png) no-repeat; }
-.postcard__decoration--flower01:before{ position:absolute; display:block; content:''; z-index:3; bottom:0px; left:-11px; width:152px; height:69px; background:url(./assets/images/decoration-flower01.png) no-repeat; }
-.postcard__decoration--flower01:after{ position:absolute; display:block; content:''; z-index:3; bottom:0px; right:-11px; width:152px; height:69px; background:url(./assets/images/decoration-flower01.png) no-repeat; transform:scale(-1, 1); }
-.postcard__decoration--flower02:before{ position:absolute; display:block; content:''; z-index:3; bottom:0px; left:-10px; width:152px; height:64px; background:url(./assets/images/decoration-flower02.png) no-repeat; }
-.postcard__decoration--flower02:after{ position:absolute; display:block; content:''; z-index:3; bottom:0px; right:-10px; width:152px; height:64px; background:url(./assets/images/decoration-flower02.png) no-repeat; transform:scale(-1, 1); }
-.postcard__decoration--teruteru{ position:absolute; display:block; z-index:3; top:0; right:20px; width:60px; height:61px; background:url(./assets/images/decoration-teruteru.png) no-repeat; }
-.postcard__thumb--dousei{ width:100%; height:100%; background:rgba(255,77,191,0.7); }
-.postcard__thumb--dokuoya{ width:100%; height:100%; background:rgba(134,85,255,0.7); }
-.postcard__thumb--shougai{ width:100%; height:100%; background:rgba(23,186,127,0.7); }
-.postcard__thumb--jimny{ width:100%; height:100%; background:rgba(58,58,219,0.7); }
-.postcard__thumb--zatsugaku{ width:100%; height:100%; background:rgba(255,202,85,0.7); }
+.postcard__decoration--bird01{ position:absolute; display:block; z-index:3; bottom:-4px; right:20px; width:52px; height:40px; background:url(./assets/images/decoration-bird01.png) no-repeat; }
+.postcard__decoration--bird02{ position:absolute; display:block; z-index:3; bottom:-4px; left:20px; width:52px; height:40px; background:url(./assets/images/decoration-bird02.png) no-repeat; }
+.postcard__decoration--bird03{ position:absolute; display:block; z-index:3; bottom:-4px; left:60px; width:52px; height:40px; background:url(./assets/images/decoration-bird03.png) no-repeat; }
+.postcard__decoration--flower:before{ position:absolute; display:block; content:''; z-index:3; bottom:0px; left:-10px; width:78px; height:66px; background:url(./assets/images/decoration-flower01.png) no-repeat; }
+.postcard__decoration--flower:after{ position:absolute; display:block; content:''; z-index:3; bottom:0px; right:-10px; width:78px; height:66px; background:url(./assets/images/decoration-flower01.png) no-repeat; transform:scale(-1, 1); }
+.postcard__decoration--teruteru{ position:absolute; display:block; z-index:1; top:0; right:60px; width:60px; height:61px; background:url(./assets/images/decoration-teruteru.png) no-repeat; }
+.postcard__thumb--dousei{ width:100%; height:100%; background-color:rgba(255,77,191,0.3); }
+.postcard__thumb--dokuoya{ width:100%; height:100%; background-color:rgba(134,85,255,0.3); }
+.postcard__thumb--shougai{ width:100%; height:100%; background-color:rgba(23,186,127,0.3); }
+.postcard__thumb--jimny{ width:100%; height:100%; background-color:rgba(58,58,219,0.3); }
+.postcard__thumb--zatsugaku{ width:100%; height:100%; background-color:rgba(255,202,85,0.3); }
 .postcard__content{ padding:15px; font-size:13px; letter-spacing:1px; line-height:1.4; }
 .postcard__cat{ display:flex; justify-content:flex-start; align-items:stretch; flex-wrap:wrap; padding:15px; }
 .postcard__cat li{ margin:0 10px 10px 0; }
@@ -81,11 +87,8 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
   .postcard__title{ font-size:18px; padding:10px; }
   .postcard__thumb{ height:140px; }
   .postcard__curtain{ width:40px; height:140px; background-size:cover; }
-  .postcard__decoration--leaf{ bottom:-20px; left:-15px; width:180px; height:120px; background-size:cover; }
-  .postcard__decoration--flower01:before{ bottom:0px; left:-6px; width:88px; height:40px; background-size:cover; }
-  .postcard__decoration--flower01:after{ bottom:0px; right:-6px; width:88px; height:40px; background-size:cover; }
-  .postcard__decoration--flower02:before{ bottom:0px; left:-6px; width:95px; height:40px; background-size:cover; }
-  .postcard__decoration--flower02:after{ bottom:0px; right:-6px; width:95px; height:40px; background-size:cover; }
+  .postcard__decoration--leaf{ bottom:-20px; left:-15px; width:184px; height:120px; background-size:cover; }
+  .postcard__decoration--teruteru{ right:40px; }
   .postcard__cat{ padding:10px; }
   .postcard__cat li{ margin:0 5px 5px 0; }
   .postcard__cat li a{ font-size:11px; padding:6px 10px; border-radius:15px; }

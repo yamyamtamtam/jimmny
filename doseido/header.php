@@ -67,7 +67,24 @@
       <div class="archive-nav-wrap">
         <h3 class="headline-white">月別アーカイブ</h3>
         <ul class="archive-nav">
-          <?php wp_get_archives("type=monthly&show_post_count=true"); ?>
+          <?php
+            $archives_year = strip_tags(wp_get_archives('type=yearly&show_post_count=0&format=custom&echo=0'));
+            $archives_year = str_replace(array("&nbsp;","\r\n","\n"), ',', $archives_year);
+            $archives_year_array = explode(',',$archives_year);
+            array_pop($archives_year_array);
+            $archives_month = strip_tags(wp_get_archives('type=monthly&show_post_count=0&format=custom&echo=0'));
+            $archives_month = str_replace(array("&nbsp;","\r\n","\n"), ',', $archives_month);
+            $archives_month_array = explode(',',$archives_month);
+            foreach($archives_year_array as $archives_year_current){
+              echo '<li><a href="' . esc_url(home_url( '/' )) . $archives_year_current . '">' . $archives_year_current . '年</a></li>';
+              foreach($archives_month_array as $archives_month_current){
+                if(strpos($archives_month_current,$archives_year_current) !== false){
+                  $archives_month_link = str_replace(array("年","月"), '/', $archives_month_current);
+                  echo '<li><a href="' . esc_url(home_url( '/' )) . $archives_month_link . '">' . $archives_month_current . '</a></li>';
+                }
+              }
+            }
+          ?>
         </ul>
       </div>
     </div>
