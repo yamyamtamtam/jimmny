@@ -12,11 +12,25 @@ jQuery(function($){
     }, 500);
     return false;
   });
+  ////////////////////////////////
+  /*クリックでなにかする系の動作*/
+  ///////////////////////////////
   $(".js-humbergerButton").click(function(){
     $(".humberger-nav").addClass("humberger-nav--active");
   });
   $(".js-humbergerClose").click(function(){
     $(".humberger-nav").removeClass("humberger-nav--active");
+  });
+  $(".js-archive-area").hide();
+  $(".js-archive").click(function(){
+    var id = $(this).attr("id");
+    var selecter = ".js-archive-area--" + id;
+    $(selecter).slideToggle();
+    if($(this).hasClass("js-archive--active")){
+      $(this).html("+").removeClass("js-archive--active");
+    }else{
+      $(this).html("-").addClass("js-archive--active");      
+    }
   });
   ////////////////////////////////
   /*スクロールでなにかする系の動作*/
