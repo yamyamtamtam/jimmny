@@ -54,6 +54,12 @@
       ?>
     </article>
 </main>
+<div class="js-pagelinkButton pagelink-button">
+  <span class="pagelink-button__line"></span>
+  <span class="pagelink-button__line"></span>
+  <span class="pagelink-button__line"></span>
+  <p class="pagelink-button__text">目次</p>
+</div>
 <script>
 jQuery(function($){
   $.ajax({
