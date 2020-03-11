@@ -6,7 +6,7 @@
           while (have_posts()):
             the_post();
       ?>
-      <h2 class="single-content__headline"><?php echo the_title(); ?></h2>
+      <h2 class="single-content__headline"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/headline-ribbon.png" alt=""><?php echo the_title(); ?></h2>
       <p class="single-content__date"><?php echo get_the_date( 'Y年n月j日D曜日', $post->ID ); ?></p>
       <ul class="single-content__cat">
       <?php $cats = get_the_category( $post->ID ); ?>
