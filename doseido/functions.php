@@ -36,7 +36,7 @@ function add_original_tinymce_button_plugin( $plugin_array ) {
 
 add_filter( 'mce_buttons_2', 'add_original_tinymce_button' );
 function add_original_tinymce_button( $buttons ) {
-  $buttons = array('lineLeft','lineRight','markerYellow','markerPink');
+  $buttons = array('lineLeft','lineRight','markerYellow','markerPink','insertSortcode');
   return $buttons;
 }
 add_editor_style( 'admin/editor-style.css' );
@@ -53,6 +53,31 @@ function twpp_change_excerpt_more( $more ) {
   return '<span class="text-grey-small">...続きをよむ</span>';
 }
 add_filter( 'excerpt_more', 'twpp_change_excerpt_more' );
+
+//車の入力欄の挿入処理
+function list_insert($atts) {
+  $id = $atts[0];
+  if(SCF::get('list_insert')){
+    $lists = SCF::get('list_insert');
+    $html = '';
+    $number = 1;
+    foreach ($lists as $list) {
+      $html = $html . '<dl class="insertlist">';
+      if($list['image']){
+        $html = $html . '<dt class="insertlist__number"><span>' . $number . '</span></dt>';
+        $html = $html . '<dd class="insertlist__image"><img src="' . wp_get_attachment_url($list['image']) . '" alt=""></dd>';
+        $html = $html . '<dd class="insertlist__text">' . $list['text'] . '</dd>';
+      }else{
+        $html = $html . '<dt class="insertlist__number"><span>' . $number . '</span></dt>';
+        $html = $html . '<dd class="insertlist__textonly">' . $list['text'] . '</dd>';
+      }
+      $html = $html . '</dl>';
+      $number ++;
+    }
+  }
+  return $html;
+}
+add_shortcode('listInsert', 'list_insert');
 
 ///////////////////////
 //***  処理の制御 ***//
@@ -123,6 +148,8 @@ function recommendCall(){
   foreach($post_cats_objects as $post_cats_obj){
     array_push($post_cats,$post_cats_obj->term_id);
   }
+  $title = str_replace('【', '', $title);
+  $title = str_replace('】', '', $title);
   $title_split = array_slice(preg_split("//u", $title), 1, -1);
   $ids = get_posts(array(
     'numberposts' => -1,
@@ -143,7 +170,7 @@ function recommendCall(){
       array_push($other_cats,$other_cats_obj->term_id);
     }
     $equal_count_cat = array_intersect($post_cats,$other_cats);
-    $recommends[$id] = count($equal_count_post) + ( count($equal_count_cat) * 2 );
+    $recommends[$id] = count($equal_count_post) + ( count($equal_count_cat) * 10 );
   }
   arsort($recommends);
   $i = 0;
@@ -160,7 +187,25 @@ function recommendCall(){
       if(get_the_post_thumbnail($key)){
         $html = $html . '<img src="' . get_the_post_thumbnail_url($key, 'medium') . '" alt="">';
       }else{
-        $html = $html . '<div class="recommend__thumb--dummy postcard__thumb--' . idToCategoryConvert($key) . '"></div>';
+        $window_num = rand(2,5);
+        switch ($window_num) {
+          case 1:
+            $window_bg = 'normal';
+            break;
+          case 2:
+            $window_bg = 'arabesque01';
+            break;
+          case 3:
+            $window_bg = 'arabesque02';
+            break;
+          case 4:
+            $window_bg = 'damask01';
+            break;
+          case 5:
+            $window_bg = 'damask02';
+            break;
+        }
+        $html = $html . '<div class="recommend__thumb--dummy postcard__thumb--' . $window_bg . ' postcard__thumb--' . idToCategoryConvert($key) . '"></div>';
       }
       $html = $html . '</div>';
       $html = $html . '<p class="recommend__title">' . get_the_title($key) . '</p>';

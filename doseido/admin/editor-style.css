@@ -1,7 +1,7 @@
 #tinymce p{ font-size:17px; line-height:2.5; letter-spacing:0.8px; }
 #tinymce p span{ line-height:1.4;}
 .undeline-yellow{ font-weight:bold; background: linear-gradient(transparent 65%, rgba(255,239,87,0.5) 65%); }
-.undeline-pink{ font-weight:bold; background: linear-gradient(transparent 65%, rgba(255,239,87,0.5) 65%); }
+.undeline-pink{ font-weight:bold; background: linear-gradient(transparent 65%, rgba(255,77,191,0.5) 65%); }
 #tinymce a{ font-size:16px; line-height:2.0; letter-spacing:0.8px; color:#ff4dbf; text-decoration:none; }
 #tinymce h3{ position:relative; margin:60px 0 20px; padding:0 0 15px 30px; font-size:22px; font-weight:bold; letter-spacing:1px; line-height:1.4; color:#ff4dbf; border-bottom:2px solid #ff4dbf; }
 #tinymce h3 span{ position:relative; z-index:1; }

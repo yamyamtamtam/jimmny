@@ -98,7 +98,28 @@
         var return_text = '<strong class="undeline-pink">' + selected_text + '</strong>';
         ed.insertContent(return_text);
       });
+      ed.addButton( 'insertSortcode', {
+        title: '車の入力欄挿入',
+        image: url + '/shortcode.png',
+        cmd: 'insert_sortcode'
+      });
+      ed.addCommand( 'insert_sortcode', function() {
+        var id = getParam('post')
+        console.log(id);
+        var selected_text = ed.selection.getContent();
+        var return_text = '[listInsert ' + id + ']';
+        ed.insertContent(return_text);
+      });
     }
   });
   tinymce.PluginManager.add( 'original_tinymce_button_plugin', tinymce.plugins.original_tinymce_button );
+  function getParam(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 })();
