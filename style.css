@@ -286,9 +286,10 @@ main,p,a,div,section,article,li,dt,dd{ word-break:break-all; }
 .undeline-yellow{ font-weight:bold; background: linear-gradient(transparent 65%, rgba(255,239,87,0.5) 65%); }
 .undeline-pink{ font-weight:bold; background: linear-gradient(transparent 65%, rgba(255,77,191,0.5) 65%); }
 .single-content__main a{ font-size:16px; line-height:2.0; letter-spacing:0.8px; color:#ff4dbf; text-decoration:none; }
-.single-content__main h3{ position:relative; margin:60px 0 20px; padding:0 0 15px 30px; font-size:22px; font-weight:bold; letter-spacing:1px; line-height:1.4; color:#ff4dbf; border-bottom:2px solid #ff4dbf; }
+.single-content__main h3{ position:relative; margin:60px 0 20px; padding:0 40px 5px 45px; font-size:22px; font-weight:bold; letter-spacing:1px; line-height:1.4; color:#ff4dbf; border-bottom:2px solid #001156; }
 .single-content__main h3 span{ position:relative; z-index:1; }
-.single-content__main h3:after{ content:''; position:absolute; top:-30px; left:0; z-index:0; display:block; width:70px; height:70px; background:url(./assets/images/headline-bg.png); background-size:cover; }
+.single-content__main h3:before{ content:''; position:absolute; top:0; bottom:0; left:0; margin:auto; z-index:0; display:block; width:40px; height:32px; background:url(./assets/images/butterfly-icon.svg); background-size:cover; transform:rotateZ(-14deg); }
+.single-content__main h3:after{ content:''; position:absolute; bottom:-5px; right:0; z-index:0; display:block; width:36px; height:36px; background:url(./assets/images/car-icon.svg); background-size:cover; }
 .single-content__main h4{ position:relative; display:inline-block; margin:40px 0 20px; padding:0 30px 5px 30px; color:#ff5757; border-bottom:1px dotted #ffca55; font-size:20px; letter-spacing:1px; line-height:1.4; font-weight:bold; }
 .single-content__main h4:before{ content:''; position:absolute; top:-15px; left:0; display:block; width:26px; height:30px; background:url(assets/images/h4-bg.png) no-repeat; }
 .h3-clone-headline{ position:absolute; top:-20px; left:35px; font-size:11px; color:rgba(255,77,191,0.6); display:block; width:calc(100vw - 100px); line-height:1.0; }
