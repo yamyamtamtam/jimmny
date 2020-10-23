@@ -6,8 +6,13 @@
           while (have_posts()):
             the_post();
       ?>
-      <h2 class="single-content__headline"><span><?php echo get_the_date( 'D曜', $post->ID ); ?>&nbsp;<?php echo get_the_date( 'Y.n.j', $post->ID ); ?></span><br><?php echo the_title(); ?></h2>
-      <!--<p class="single-content__date"><?php echo get_the_date( 'Y年n月j日D曜日', $post->ID ); ?></p>-->
+      <div class="numberplate-headline">
+        <div class="numberplate-headline__date"><?php echo get_the_date( 'D曜', $post->ID ); ?>&nbsp;<?php echo get_the_date( 'Y.n.j', $post->ID ); ?></div>
+        <div class="numberplate-headline__title">
+          <span>あ</span>
+          <h2><?php echo the_title(); ?></h2>
+        </div>
+      </div>
       <ul class="single-content__tag">
       <?php $tags = get_the_tags(); ?>
       <?php
