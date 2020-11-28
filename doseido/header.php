@@ -16,7 +16,7 @@
     <div class="header-deco__center"></div>
   </div>
   <section class="header-top">
-    <h1 class="header-logo"><a href="<?php echo esc_url(home_url( '/' )); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-swing.png" alt="<?php bloginfo('name'); ?>"></a></h1>
+    <h1 class="header-logo"><a href="<?php echo esc_url(home_url( '/' )); ?>"><img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.svg" alt="<?php bloginfo('name'); ?>"></a></h1>
     <p class="header-description"><?php bloginfo('description'); ?></p>
   </section>
   <nav class="g-nav">

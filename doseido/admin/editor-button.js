@@ -110,6 +110,84 @@
         var return_text = '[listInsert ' + id + ']';
         ed.insertContent(return_text);
       });
+      ed.addButton( 'kangaeLeft', {
+        title: '考えごと左から',
+        image: url + '/kangae-left.png',
+        cmd: 'kangae_left'
+      });
+      ed.addCommand( 'kangae_left', function(ui, val) {
+        let kangaename = '';
+        let kangaeicon = '';
+        if (val && val.kangaename) kangaename = val.kangaename;
+        if (val && val.kangaeicon) kangaeicon = val.kangaeicon;
+        ed.windowManager.open({
+          title: '考えごと左から',
+          body: [
+            {
+              type: 'listbox',
+              name: 'lineicon',
+              label: 'アイコン',
+              value: kangaeicon,
+              'values': [
+                {text: 'あかたむ', value: 'akatam'},
+                {text: 'ざき', value: 'zaki'},
+                {text: '男', value: 'otoko'},
+                {text: '女', value: 'onna'},
+              ],
+            },
+            {
+              type: 'textbox',
+              name: 'kangaename',
+              label: '名前',
+              value: kangaename
+            }
+          ],
+          onsubmit: function(e) {
+            var shortcode = '[kangae_left icon="' + e.data.lineicon + '" name="' + e.data.linename + '"][/kangae_left]';
+            var return_text = '<div class="js-line kangae-left"><div class="line-left__icon line-left__icon--' + e.data.lineicon + '"><p>' + e.data.linename + '</p></div><p class="kangae-left__text"></p></div>';
+            ed.insertContent(return_text);
+          }
+        });
+      });
+      ed.addButton( 'kangaeRight', {
+        title: '考えごと右から',
+        image: url + '/kangae-right.png',
+        cmd: 'kangae_right'
+      });
+      ed.addCommand( 'kangae_right', function(ui, val) {
+        let kangaename = '';
+        let kangaeicon = '';
+        if (val && val.kangaename) kangaename = val.kangaename;
+        if (val && val.kangaeicon) kangaeicon = val.kangaeicon;
+        ed.windowManager.open({
+          title: '考えごと右から',
+          body: [
+            {
+              type: 'listbox',
+              name: 'lineicon',
+              label: 'アイコン',
+              value: kangaeicon,
+              'values': [
+                {text: 'あかたむ', value: 'akatam'},
+                {text: 'ざき', value: 'zaki'},
+                {text: '男', value: 'otoko'},
+                {text: '女', value: 'onna'},
+              ],
+            },
+            {
+              type: 'textbox',
+              name: 'kangaename',
+              label: '名前',
+              value: kangaename
+            }
+          ],
+          onsubmit: function(e) {
+            var shortcode = '[kangae_right icon="' + e.data.lineicon + '" name="' + e.data.linename + '"][/kangae_right]';
+            var return_text = '<div class="js-line kangae-right"><div class="line-right__icon line-right__icon--' + e.data.lineicon + '"><p>' + e.data.linename + '</p></div><p class="kangae-right__text"></p></div>';
+            ed.insertContent(return_text);
+          }
+        });
+      });
     }
   });
   tinymce.PluginManager.add( 'original_tinymce_button_plugin', tinymce.plugins.original_tinymce_button );

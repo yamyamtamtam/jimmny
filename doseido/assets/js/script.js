@@ -148,6 +148,7 @@ jQuery(function($){
   $(pagelinkDomFixed).addClass('pagelink pagelink--fixed js-pagelinkArea');
   $('<p></p>').attr({class:'pagelink__headline'}).text('目次').appendTo(pagelinkDom);
   $('<p></p>').attr({class:'pagelink__headline'}).text('目次').appendTo(pagelinkDomFixed);
+  console.log(h3elements.length);
   if(h3elements){
     for( var i=0; i<h3elements.length; i++) {
       h3offsetTop = h3elements[i].offsetTop;
@@ -177,7 +178,7 @@ jQuery(function($){
         }
       }
     }
-    if(h3elements.length > 1){
+    if(h3elements.length > 1 || (h3elements.length == 1 && h4elements.length > 0)){
       $(h3elements[0]).before(pagelinkDom);
       $('<div></div>').addClass('pagelink__close js-pagelinkClose').text('×').appendTo(pagelinkDomFixed);
       $('.footer').before(pagelinkDomFixed);
